@@ -1,0 +1,28 @@
+# ---------- Build stage (uses Maven Wrapper) ----------
+FROM eclipse-temurin:21-jdk AS build
+WORKDIR /app
+
+# Copy wrapper + metadata first for better cache hits
+COPY .mvn/ .mvn/
+COPY mvnw mvnw.cmd pom.xml ./
+RUN ./mvnw -q -DskipTests dependency:go-offline
+
+# Copy sources last
+COPY src ./src
+
+# Build the jar (skip tests if you prefer)
+RUN ./mvnw -q -DskipTests package
+
+# ---------- Runtime stage ----------
+FROM eclipse-temurin:21-jre
+WORKDIR /app
+
+# Copy the built artifact
+COPY --from=build /app/target/tictactoe-*.jar /app/app.jar
+
+# Default port inside the container
+ENV PORT=8090
+EXPOSE 8090
+
+# Run the web server (reads PORT env var)
+CMD ["sh", "-c", "java -cp /app/app.jar dev.bhim.tictactoe.web.WebServer"]

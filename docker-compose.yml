@@ -1,0 +1,21 @@
+
+services:
+  tictactoe-cli:
+    build:
+      context: .
+      dockerfile: Dockerfile        # CLI Dockerfile (runs dev.bhim.tictactoe.cli.Main)
+    image: tictactoe:latest
+    stdin_open: true               # keep STDIN open for interactive input
+    tty: true                      # allocate a TTY so prompts render correctly
+    profiles: [cli]
+
+  tictactoe-web:
+    build:
+      context: .
+      dockerfile: Dockerfile.web   # Web UI Dockerfile (runs WebServer)
+    image: tictactoe-web:latest
+    environment:
+      - PORT=8090                  # container listen port (WebServer reads PORT)
+    ports:
+      - "8095:8090"               # host:container;
+    profiles: [web]

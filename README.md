@@ -1,8 +1,8 @@
-# Tic-Tac-Toe (Java 21, Maven)
+# Tic-Tac-Toe
 
 This project implements Tic-Tac-Toe as a **reusable and UI‑independent game library**. The core module contains all game logic, including board state, turn handling, and win/draw evaluation, without any user interface or input/output code. This separation allows the logic to be thoroughly tested and reused in different presentation layers.
 
-A reusable Tic-Tac-Toe **library** with three example user interfaces:
+The project includes three example user interfaces built on top of the same core **library**:
 
 * **CLI** (terminal-based)
 * **Swing GUI** (desktop application)
@@ -23,18 +23,6 @@ I built the UIs in stages during development:
 
 Each UI uses the **same underlying game library**.
 No logic is duplicated.
-
----
-
-**Why Docker and Docker Compose?**
-
-The Web UI is packaged in a Docker container so that it can run **without requiring Java to be installed** on the reviewer’s machine. Docker provides a consistent environment for running the application.
-
-Docker Compose is used to define the run configuration (port mapping, environment variables, and startup command) so the Web UI can be started easily with **a single command**:
-
-```bash
-docker compose --profile web up -d
-```
 
 
 ---
@@ -98,6 +86,16 @@ For other run options (CLI, Swing GUI, local runs), see the dedicated guide:
 
 ---
 
+**Why Docker and Docker Compose?**
+
+The Web UI is packaged in a Docker container so that it can run **without requiring Java to be installed** on the machine. Docker provides a consistent environment for running the application.
+
+Docker Compose is used to define the run configuration (port mapping, environment variables, and startup command) so the Web UI can be started easily with **a single command.**
+
+
+
+---
+
 ## Tests
 
 Run all tests:
@@ -114,29 +112,46 @@ Windows:
 
 ---
 
-## Design Notes
 
-* The core library contains **no I/O** → fully testable.
-* UIs depend on the core module but the core does **not** depend on UIs.
-* This separation allows easily adding:
 
-  * AI players
-  * WebSocket multiplayer
-  * Kotlin Notebook demos
+## Kotlin Notebook Demo
+
+A Kotlin Notebook is included to **interactively explore** the game logic.
+
+Open:
+
+```
+notebooks/TicTacToeDemo.ipynb
+```
+
+In IntelliJ IDEA:
+
+1. Open the notebook
+2. In the top‑right toolbar, set **Run in IDE Process** (or Use Project Classpath)
+3. In the dependencies dropdown → select **tictactoe** library
+4. Click **Run All**
+
+This allows running and visualizing the game **without any UI**, ideal for explaining and experimenting with the logic.
+
+
 
 ---
 
-## Optional Next Enhancements
-
-* Add a computer-controlled player
-* Add a stronger game AI
-* Add a Kotlin Notebook showcasing game interaction
-
----
 
 ## Additional Documentation
 
-* **ARCHITECTURE.md** - High-level structure of the core library and UIs.
-* **DESIGN_DECISIONS.md** - Rationale behind key implementation choices.
-* **RUNNING.md** - Detailed instructions for running CLI, Swing, and Web UI.
-* **TESTING.md** - Testing approach and instructions.
+| File                              | Purpose                                                   |
+| --------------------------------- | --------------------------------------------------------- |
+| **ARCHITECTURE.md**               | High‑level structure of the core library and UIs.         |
+| **DESIGN_DECISIONS.md**           | Reasoning behind key implementation choices.              |
+| **RUNNING.md**                    | Detailed instructions for running CLI, Swing, and Web UI. |
+| **TESTING.md**                    | Testing strategy and how to run tests.                    |
+| **notebooks/TicTacToeDemo.ipynb** | Interactive Kotlin Notebook demo of core logic.           |
+
+---
+
+The architecture ensures:
+
+* The game logic is **fully isolated and testable**.
+* UIs are **replaceable and extendable**.
+* New interfaces such as **AI players**, **WebSocket multiplayer**, or **mobile UIs** can be added without changing the core.

@@ -74,7 +74,7 @@ Indicates the state of the game:
 1. UI requests move coordinates from a player.
 2. UI calls:
 
-   ```java
+   ```
    game.playMove(row, col);
    ```
 3. `Game` delegates to `Board.place()` and updates the current player.

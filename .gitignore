@@ -40,3 +40,7 @@ build/
 
 ### Mac OS ###
 .DS_Store
+
+
+# Personal / private documentation
+INTERVIEW_NOTES.md

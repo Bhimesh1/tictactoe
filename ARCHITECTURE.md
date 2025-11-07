@@ -91,7 +91,6 @@ Indicates the state of the game:
 
 New frontends can be added without modifying the core:
 
-* Web UI
 * Kotlin Notebook demonstration
 * Computer-controlled player (random or strategy-based)
 

@@ -61,7 +61,7 @@ docker compose --profile web down
 Visit in browser:
 
 ```
-http://localhost:8080
+http://localhost:8090
 ```
 
 ---

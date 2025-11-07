@@ -17,20 +17,25 @@ Each UI is just a thin layer on top.
 
 I built the UIs in stages during development:
 
-1. **CLI first** – to verify the game rules and flow quickly.
-2. **Swing GUI** – to provide a more interactive playing experience.
-3. **Web UI** – to make the game easier to run and demonstrate, especially for interviewers, with *no local setup* required (just Docker Compose).
+1. **CLI first** - to verify the game rules and flow quickly.
+2. **Swing GUI** - to provide a more interactive playing experience.
+3. **Web UI** - to make the game easier to run and demonstrate, especially for interviewers, with *no local setup* required (just Docker Compose).
 
 Each UI uses the **same underlying game library**.
 No logic is duplicated.
 
 ---
 
-## Requirements
+**Why Docker and Docker Compose?**
 
-* Java 21
-* Maven Wrapper (included)
-* Optional: Docker + Docker Compose (for Web UI)
+The Web UI is packaged in a Docker container so that it can run **without requiring Java to be installed** on the reviewer’s machine. Docker provides a consistent environment for running the application.
+
+Docker Compose is used to define the run configuration (port mapping, environment variables, and startup command) so the Web UI can be started easily with **a single command**:
+
+```bash
+docker compose --profile web up -d
+```
+
 
 ---
 
@@ -78,7 +83,7 @@ docker compose --profile web up -d
 Then open:
 
 ```
-http://localhost:8060
+http://localhost:8090
 ```
 
 To stop:
@@ -131,7 +136,7 @@ Windows:
 
 ## Additional Documentation
 
-* **ARCHITECTURE.md** – High-level structure of the core library and UIs.
-* **DESIGN_DECISIONS.md** – Rationale behind key implementation choices.
-* **RUNNING.md** – Detailed instructions for running CLI, Swing, and Web UI.
-* **TESTING.md** – Testing approach and instructions.
+* **ARCHITECTURE.md** - High-level structure of the core library and UIs.
+* **DESIGN_DECISIONS.md** - Rationale behind key implementation choices.
+* **RUNNING.md** - Detailed instructions for running CLI, Swing, and Web UI.
+* **TESTING.md** - Testing approach and instructions.

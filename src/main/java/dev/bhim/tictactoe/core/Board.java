@@ -72,7 +72,15 @@ public class Board {
         return ' ';
     }
 
-
+    // Prints the board
+    public void print() {
+        for (int r = 0; r < 3; r++) {
+            System.out.printf(" %c | %c | %c %n", grid[r][0], grid[r][1], grid[r][2]);
+            if (r < 2) {
+                System.out.println("---+---+---");
+            }
+        }
+    }
 
 
 
